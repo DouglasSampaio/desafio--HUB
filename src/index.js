@@ -4,12 +4,29 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+
+import Login from './pages/Login';
+import Tasks from './pages/Cadastro/Comeco';
+import CadastroUser from './pages/Cadastro/cadastroUsuario';
+import { BrowserRouter, Switch, Route } from 'react-router-dom'
+
+// ReactDOM.render(
+//   <React.StrictMode>
+//     <App />
+//   </React.StrictMode>,
+//   document.getElementById('root')
+// );
+
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+  <BrowserRouter>
+      <Switch>
+          <Route path="/" exact={true} component={App} />
+          <Route path="/Tasks1" component={Tasks} />
+          <Route path="/CadastroUser" component={CadastroUser} />
+      </Switch>
+  </ BrowserRouter>
+  , document.getElementById('root')
+  );
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
