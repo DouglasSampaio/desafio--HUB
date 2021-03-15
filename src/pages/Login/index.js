@@ -38,7 +38,7 @@ export default function Login() {
         e.preventDefault()
 
         const response = await axios.get(
-            `http://localhost:3333/users`,
+            `https://desafio-hub.herokuapp.com/`,
             { email, password }
         )
 
@@ -69,7 +69,7 @@ export default function Login() {
     useEffect(() => {
         async function listagem() {
             const response = await axios.get(
-                `http://localhost:3333/users`
+                `https://desafio-hub.herokuapp.com/users`
             );
             // setUsers(response.data.map((x) => x.email));
             // setPassword(response.data.map((x) => x.password))
