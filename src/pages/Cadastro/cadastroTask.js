@@ -41,25 +41,23 @@ class AddEditForm extends React.Component {
             alert("Task Criada com Sucesso!")
     }
 
-    submitFormEdit = e => {
-        e.preventDefault()
-        fetch(`http://localhost:3333/tasks${id}}`, {
+    submitFormEdit = () => {
+        fetch(`http://localhost:3333/tasks/${parseInt(this.state.id)}`, {
             method: 'put',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                id: this.state.id,
                 name: this.state.name,
                 description: this.state.description,
                 data: this.state.data,
-                status: this.state.status,
+                status: this.state.status,                
             })
         })
             .then(response => response.json())
             .then(item => {
                 if (Array.isArray(item)) {
-                    // console.log(item[0])
+                     //console.log("oi",item[0])
                     this.props.updateState(item[0])
                     this.props.toggle()
                 } else {
@@ -67,6 +65,7 @@ class AddEditForm extends React.Component {
                 }
             })
             .catch(err => console.log(err))
+            
     }
 
     componentDidMount() {
@@ -78,38 +77,35 @@ class AddEditForm extends React.Component {
     }
 
     render() {
-        return (
-            
-        <><div><h3 className="mt-5">Cadastre Suas Task</h3>
-            <Container className="mt-5">
-            <Row className="center">
+        return (     
+        <>
+            <Container className="w-75 ">
             <Form onSubmit={this.props.item ? this.submitFormEdit : this.submitFormAdd}>
                 <FormGroup>
+                    {console.log(this.state)}
                     <Label for="name">Nome</Label>
-                    <Input type="text" name="name" id="name" onChange={this.onChange} value={this.state.name === null ? '' : this.state.name} />
+                    <Input type="text" name="name" id="name" onChange={this.onChange} value={this.state.name === null ? '' : this.state.name}  />
                 </FormGroup>
                 <FormGroup>
                     <Label for="description">Descrição</Label>
-                    <Input type="text" name="description" id="description" onChange={this.onChange} value={this.state.description === null ? '' : this.state.description} />
+                    <Input type="textarea" rows="5" name="description" id="description" onChange={this.onChange} value={this.state.description === null ? '' : this.state.description} />
                 </FormGroup>
                 <FormGroup>
                     <Label for="data">Data</Label>
-                    <Input type="date" name="data" id="data" onChange={this.onChange} value={this.state.data === null ? '' : this.state.data} />
+                    <Input type="date"  name="data" id="data" onChange={this.onChange} value={this.state.data === null ? '' : this.state.data} />
                 </FormGroup>
                 <FormGroup>
-                    <Label for="status">Status</Label>
-                    <select name="status" id="status"  onChange={this.onChange}  value={this.state.status === null ? '' : this.state.status} >
-                        <option  name="status" id="status">NOT_DONE</option>
-                        <option  name="status" id="status">IN_PROGRESS</option>
-                        <option  name="status" id="status">DONE</option>
+                    <Label for="status">Status </Label><br/>          
+                    < select name="status" id="status"  onChange={this.onChange}  value={this.state.status === null ? '' : this.state.status} >
+                        <option  name="status" id="status"> NOT_DONE</option>
+                        <option  name="status" id="status"> IN_PROGRESS</option>
+                        <option  name="status" id="status"> DONE</option>
                     </select>
                 </FormGroup>
-                <Button>Submit</Button>
+                <Button>OK</Button>
             </Form>
-            </Row>
 
         </Container>
-        </div>
         </>
         );
     }
