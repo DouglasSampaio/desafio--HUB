@@ -8,12 +8,12 @@ class AddEditForm extends React.Component {
         email: '',
         password: ''
     }
-
+   // http://localhost:3333/
     onChange = e => {
         this.setState({ [e.target.name]: e.target.value })
     }
     submitFormAdd = () => {
-        fetch(`http://localhost:3333/users/`, {
+        fetch(`https://desafio-hub.herokuapp.com/`, {
             method: 'post',
             headers: {
                 'Content-Type': 'application/json'

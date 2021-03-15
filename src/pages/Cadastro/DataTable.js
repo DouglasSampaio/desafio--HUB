@@ -10,7 +10,7 @@ class DataTable extends Component {
   deleteItem = id => {
     let confirmDelete = window.confirm('Deseja realmente excluir task?')
     if (confirmDelete) {
-      fetch(`http://localhost:3333/tasks/${id}`, {
+      fetch(`https://desafio-hub.herokuapp.com/tasks/${id}`, {
         method: 'delete',
         headers: {
           'Content-Type': 'application/json'
