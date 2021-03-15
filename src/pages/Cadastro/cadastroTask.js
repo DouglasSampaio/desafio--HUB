@@ -15,7 +15,7 @@ class AddEditForm extends React.Component {
         this.setState({ [e.target.name]: e.target.value })
     }
     submitFormAdd = () => {
-        fetch(`https://desafio-hub.herokuapp.com/task/${localStorage.getItem('id')}`, {
+        fetch(`http://localhost:3333/task/${localStorage.getItem('id')}`, {
             method: 'post',
             headers: {
                 'Content-Type': 'application/json'
