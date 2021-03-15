@@ -15,7 +15,7 @@ class AddEditForm extends React.Component {
         this.setState({ [e.target.name]: e.target.value })
     }
     submitFormAdd = () => {
-        fetch(`https://desafio-hub.herokuapp.com/${localStorage.getItem('id')}`, {
+        fetch(`https://desafio-hub.herokuapp.com/task/${localStorage.getItem('id')}`, {
             method: 'post',
             headers: {
                 'Content-Type': 'application/json'
@@ -42,7 +42,7 @@ class AddEditForm extends React.Component {
     }
 
     submitFormEdit = () => {
-        fetch(`https://desafio-hub.herokuapp.com/${parseInt(this.state.id)}`, {
+        fetch(`https://desafio-hub.herokuapp.com/tasks/${parseInt(this.state.id)}`, {
             method: 'put',
             headers: {
                 'Content-Type': 'application/json'

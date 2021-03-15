@@ -13,7 +13,7 @@ class AddEditForm extends React.Component {
         this.setState({ [e.target.name]: e.target.value })
     }
     submitFormAdd = () => {
-        fetch(`https://desafio-hub.herokuapp.com/`, {
+        fetch(`https://desafio-hub.herokuapp.com/users/`, {
             method: 'post',
             headers: {
                 'Content-Type': 'application/json'
