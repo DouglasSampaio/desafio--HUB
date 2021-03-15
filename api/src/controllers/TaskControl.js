@@ -12,7 +12,7 @@ const createTask = async (req, res) => {
         status,
         user_id
     ])
-    console.log(response)
+    //console.log(response)
     res.json({
         message: 'Task criada com sucesso',
         body: {
