@@ -15,7 +15,7 @@ class AddEditForm extends React.Component {
         this.setState({ [e.target.name]: e.target.value })
     }
     submitFormAdd = () => {
-        fetch(`https://desafio-hub.herokuapp.com/${localStorage.getItem('id')}`, {
+        fetch(`http://localhost:3333/task/${localStorage.getItem('id')}`, {
             method: 'post',
             headers: {
                 'Content-Type': 'application/json'
@@ -38,11 +38,11 @@ class AddEditForm extends React.Component {
                 }
             })
             .catch(err => console.log(err))
-            alert("Task Criada com Sucesso!")
+        alert("Task Criada com Sucesso!")
     }
 
     submitFormEdit = () => {
-        fetch(`https://desafio-hub.herokuapp.com/${parseInt(this.state.id)}`, {
+        fetch(`http://localhost:3333/tasks/${parseInt(this.state.id)}`, {
             method: 'put',
             headers: {
                 'Content-Type': 'application/json'
@@ -51,13 +51,13 @@ class AddEditForm extends React.Component {
                 name: this.state.name,
                 description: this.state.description,
                 data: this.state.data,
-                status: this.state.status,                
+                status: this.state.status,
             })
         })
             .then(response => response.json())
             .then(item => {
                 if (Array.isArray(item)) {
-                     //console.log("oi",item[0])
+                    //console.log("oi",item[0])
                     this.props.updateState(item[0])
                     this.props.toggle()
                 } else {
@@ -65,7 +65,7 @@ class AddEditForm extends React.Component {
                 }
             })
             .catch(err => console.log(err))
-            
+
     }
 
     componentDidMount() {
@@ -77,36 +77,37 @@ class AddEditForm extends React.Component {
     }
 
     render() {
-        return (     
-        <>
-            <Container className="w-75 ">
-            <Form onSubmit={this.props.item ? this.submitFormEdit : this.submitFormAdd}>
-                <FormGroup>
-                    {console.log(this.state)}
-                    <Label for="name">Nome</Label>
-                    <Input type="text" name="name" id="name" onChange={this.onChange} value={this.state.name === null ? '' : this.state.name}  />
-                </FormGroup>
-                <FormGroup>
-                    <Label for="description">Descrição</Label>
-                    <Input type="textarea" rows="5" name="description" id="description" onChange={this.onChange} value={this.state.description === null ? '' : this.state.description} />
-                </FormGroup>
-                <FormGroup>
-                    <Label for="data">Data</Label>
-                    <Input type="date"  name="data" id="data" onChange={this.onChange} value={this.state.data === null ? '' : this.state.data} />
-                </FormGroup>
-                <FormGroup>
-                    <Label for="status">Status </Label><br/>          
-                    < select name="status" id="status"  onChange={this.onChange}  value={this.state.status === null ? '' : this.state.status} >
-                        <option  name="status" id="status"> NOT_DONE</option>
-                        <option  name="status" id="status"> IN_PROGRESS</option>
-                        <option  name="status" id="status"> DONE</option>
-                    </select>
-                </FormGroup>
-                <Button>OK</Button>
-            </Form>
+        return (
+            <>
+                <Container className="w-75 ">
+                    <Form onSubmit={this.props.item ? this.submitFormEdit : this.submitFormAdd}>
+                        <FormGroup>
+                            {console.log(this.state)}
+                            <Label for="name">Nome</Label>
+                            <Input type="text" name="name" id="name" onChange={this.onChange} value={this.state.name === null ? '' : this.state.name} />
+                        </FormGroup>
+                        <FormGroup>
+                            <Label for="description">Descrição</Label>
+                            <Input type="textarea" rows="5" name="description" id="description" onChange={this.onChange} value={this.state.description === null ? '' : this.state.description} />
+                        </FormGroup>
+                        <FormGroup>
+                            <Label for="data">Data</Label>
+                            <Input type="date" name="data" id="data" onChange={this.onChange} value={this.state.data === null ? '' : this.state.data} />
+                        </FormGroup>
+                        <FormGroup>
+                            <Label for="status">Status </Label><br />
+                            < select name="status" id="status" onChange={this.onChange} value={this.state.status === null ? 'NOT_DONE' : this.state.status} >
+                                <option name="status" id="status"> </option>
+                                <option name="status" id="status"> NOT_DONE</option>
+                                <option name="status" id="status"> IN_PROGRESS</option>
+                                <option name="status" id="status"> DONE</option>
+                            </select>
+                        </FormGroup>
+                        <Button>OK</Button>
+                    </Form>
 
-        </Container>
-        </>
+                </Container>
+            </>
         );
     }
 }

@@ -10,7 +10,7 @@ class Comeco extends Component {
 
 
   getItems() {
-    fetch(`https://desafio-hub.herokuapp.com/${localStorage.getItem('id')}`)
+    fetch(`http://localhost:3333/tasks/${localStorage.getItem('id')}`)
       .then(response => response.json())
       .then(items => this.setState({ items }))
       .catch(err => console.log(err))
